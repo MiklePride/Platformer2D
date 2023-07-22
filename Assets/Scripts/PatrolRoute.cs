@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent (typeof(SpriteRenderer))]
+
 public class PatrolRoute : MonoBehaviour
 {
     [SerializeField] private Transform _route;
