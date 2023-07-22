@@ -41,7 +41,5 @@ public class CoinSpawner : MonoBehaviour
 
             _isCoin = true;
         }
-
-        yield break;
     }
 }
