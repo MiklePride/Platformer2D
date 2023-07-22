@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PlayerAnimationController : MonoBehaviour
 {
+    private int _isMoveId = Animator.StringToHash("isMove");
+    private int _isJumpId = Animator.StringToHash("isJump");
+
     private Animator _animator;
     private float _horizontalMove;
     private bool _isGround;
+    private bool _isMoving;
 
     private void Awake()
     {
@@ -16,32 +20,18 @@ public class PlayerAnimationController : MonoBehaviour
     private void Update()
     {
         _horizontalMove = Input.GetAxisRaw("Horizontal");
+        _isMoving = _horizontalMove != 0;
 
-        if (_horizontalMove != 0) 
-        {
-            _animator.SetBool("isMove", true);
-        }
-        else
-        {
-            _animator.SetBool("isMove", false);
-        }
-
-        if (_isGround)
-        {
-            _animator.SetBool("isJump", false);
-        }
-        else
-        {
-            _animator.SetBool("isJump", true);
-        }
+        _animator.SetBool(_isMoveId, _isMoving);
+        _animator.SetBool(_isJumpId, !_isGround);
     }
 
-    public void JumpEnable()
+    public void Jump()
     {
         _isGround = false;
     }
 
-    public void JumpDisable()
+    public void Land()
     {
         _isGround = true;
     }
